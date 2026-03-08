@@ -4,6 +4,7 @@ import { useState, useEffect, Fragment } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Eye, Layers, Compass, BarChart3 } from 'lucide-react';
+import Link from 'next/link';
 
 /* ── Data ──────────────────────────────────────────────────── */
 
@@ -280,8 +281,9 @@ export function StudioModeSection() {
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8"
+              asChild
             >
-              Launch Studio Mode
+              <Link href="/systems-page">Launch Studio Mode</Link>
             </Button>
           </div>
 
@@ -337,8 +339,8 @@ export function StudioModeSection() {
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-6 text-lg">Ready to see what you can build?</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 rounded-full px-8">
-              Try Studio Mode Now
+            <Button size="lg" className="bg-primary hover:bg-primary/90 rounded-full px-8" asChild>
+              <Link href="/systems-page">Try Studio Mode Now</Link>
             </Button>
             <Button variant="outline" size="lg" className="rounded-full px-8 border-border hover:bg-muted">
               Watch Demo

@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import Link from 'next/link';
 
 export function CTASection() {
   return (
@@ -19,8 +20,9 @@ export function CTASection() {
           <Button
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 font-semibold"
+            asChild
           >
-            Start Exploring
+            <Link href="/systems-page">Start Exploring</Link>
           </Button>
           <Button
             variant="outline"

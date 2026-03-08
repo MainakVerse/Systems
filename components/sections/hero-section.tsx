@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import { useState, useEffect, Fragment } from 'react';
 
 const cyclingPhrases = ['You Own.', 'You Control.', 'You Scale.'];
@@ -183,8 +184,9 @@ export function HeroSection() {
               variant="outline"
               size="lg"
               className="rounded-full px-8 border-border hover:bg-muted"
+              asChild
             >
-              Enter Studio Mode
+              <Link href="/systems-page">Enter Studio Mode</Link>
             </Button>
           </div>
         </div>

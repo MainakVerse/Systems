@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 const systems = [
   {
@@ -156,8 +157,8 @@ export function SixSystemsSection() {
           <p className="text-muted-foreground mb-6">
             All six systems work together seamlessly through a unified data model and API.
           </p>
-          <Button size="lg" className="bg-primary hover:bg-primary/90 rounded-full px-8">
-            Explore Integration Architecture
+          <Button size="lg" className="bg-primary hover:bg-primary/90 rounded-full px-8" asChild>
+            <Link href="/systems-page">Explore Integration Architecture</Link>
           </Button>
         </div>
       </div>

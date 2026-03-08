@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const NAV_LINKS = [
   { label: 'Home',         href: '#home' },
@@ -15,8 +17,16 @@ const NAV_LINKS = [
   { label: 'Get Started',  href: '#get-started' },
 ]
 
+const SYSTEMS_PAGE_LINKS = [
+  { label: 'Home',            href: '/'        },
+  { label: 'Privacy Policy',  href: '/privacy' },
+  { label: 'Terms',           href: '/terms'   },
+]
+
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+  const isSystemsPage = pathname === '/systems-page'
 
   // Close on Escape
   useEffect(() => {
@@ -33,7 +43,6 @@ export default function Navbar() {
 
   const handleLink = (href: string) => {
     setOpen(false)
-    // tiny delay lets the sidebar start closing before scroll
     setTimeout(() => {
       document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
     }, 120)
@@ -63,17 +72,31 @@ export default function Navbar() {
       <nav className={`nav-panel${open ? ' nav-panel--open' : ''}`} aria-label="Site navigation">
         <p className="nav-panel-brand">6ystems</p>
         <ul className="nav-list">
-          {NAV_LINKS.map(({ label, href }, i) => (
-            <li key={href} className="nav-item" style={{ '--i': i } as React.CSSProperties}>
-              <button
-                className="nav-link"
-                onClick={() => handleLink(href)}
-              >
-                <span className="nav-link-num">0{i + 1}</span>
-                {label}
-              </button>
-            </li>
-          ))}
+          {isSystemsPage
+            ? SYSTEMS_PAGE_LINKS.map(({ label, href }, i) => (
+                <li key={href} className="nav-item" style={{ '--i': i } as React.CSSProperties}>
+                  <Link
+                    className="nav-link"
+                    href={href}
+                    onClick={() => setOpen(false)}
+                  >
+                    <span className="nav-link-num">0{i + 1}</span>
+                    {label}
+                  </Link>
+                </li>
+              ))
+            : NAV_LINKS.map(({ label, href }, i) => (
+                <li key={href} className="nav-item" style={{ '--i': i } as React.CSSProperties}>
+                  <button
+                    className="nav-link"
+                    onClick={() => handleLink(href)}
+                  >
+                    <span className="nav-link-num">0{i + 1}</span>
+                    {label}
+                  </button>
+                </li>
+              ))
+          }
         </ul>
       </nav>
     </>
