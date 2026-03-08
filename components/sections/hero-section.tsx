@@ -254,7 +254,7 @@ export function HeroSection() {
 
             {/* Outer circles */}
             {[0, 60, 120, 180, 240, 300].map((angle, i) => {
-              const labels = ['Manage', 'Booking', 'Records', 'Commerce', 'Comms', 'Intel'];
+              const labels = ['Business', 'Data', 'AI', 'Process', 'Finance', 'Resources'];
               const rad = (angle * Math.PI) / 180;
               const cx = (203 * Math.cos(rad)).toFixed(2);
               const cy = (203 * Math.sin(rad)).toFixed(2);
