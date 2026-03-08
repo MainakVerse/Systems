@@ -356,6 +356,106 @@
   animation: pl-saber 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* ─── Global glassmorphic 3D card effect ────────────────── */
+/*
+  Selector logic:
+    div + [border] + ([hover:shadow-lg] OR [bg-card]) + ([rounded-lg] OR [rounded-2xl] OR [rounded-xl])
+  This catches every card / box across all sections without touching individual files.
+*/
+div[class~="border"]:is([class~="hover:shadow-lg"], [class~="bg-card"]):is(
+  [class~="rounded-lg"],
+  [class~="rounded-2xl"],
+  [class~="rounded-xl"]
+) {
+  /* Glassmorphic fill – overrides bg-card / bg-gradient */
+  background: rgba(255, 255, 255, 0.44) !important;
+  backdrop-filter: blur(16px) saturate(1.5) brightness(1.02);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5) brightness(1.02);
+
+  /* Frosted-glass edge */
+  border: 1px solid rgba(255, 255, 255, 0.68) !important;
+
+  /* 3-layer 3D shadow:
+       1. tight near-shadow  (contact)
+       2. mid  diffuse       (elevation)
+       3. far  ambient       (depth)
+     + inset top-edge highlight (glass surface) */
+  box-shadow:
+    inset 0 1px 0   rgba(255, 255, 255, 0.85),
+    0  2px  4px     rgba(0,   0,   0, 0.04),
+    0  8px 20px     rgba(0,   0,   0, 0.07),
+    0 22px 44px     rgba(0,   0,   0, 0.08),
+    0  2px 24px     rgba(100, 80, 240, 0.04);
+
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.2, 0, 0.3, 1);
+  will-change: transform;
+}
+
+/* Hover: lift + deepen all three shadow layers */
+div[class~="border"]:is([class~="hover:shadow-lg"], [class~="bg-card"]):is(
+  [class~="rounded-lg"],
+  [class~="rounded-2xl"],
+  [class~="rounded-xl"]
+):hover {
+  transform: translateY(-5px) scale(1.005);
+  box-shadow:
+    inset 0 1px 0   rgba(255, 255, 255, 0.95),
+    0  4px  8px     rgba(0,   0,   0, 0.06),
+    0 16px 32px     rgba(0,   0,   0, 0.11),
+    0 36px 64px     rgba(0,   0,   0, 0.10),
+    0  2px 36px     rgba(100, 80, 240, 0.07);
+}
+
+/* ─── Studio Mode Preview animations ───────────────────── */
+
+/* Browse: tiles pulse-scan sequentially */
+@keyframes studio-scan {
+  0%, 100% { opacity: 0.25; transform: scale(0.88); }
+  50%       { opacity: 1;    transform: scale(1);    }
+}
+
+/* Select: checkbox fill */
+@keyframes studio-check-bg {
+  from { background: transparent; border-color: rgba(99,102,241,0.4); }
+  to   { background: #6366f1;     border-color: #6366f1; }
+}
+@keyframes studio-check-mark {
+  0%   { opacity: 0; transform: scale(0) rotate(-20deg); }
+  70%  { opacity: 1; transform: scale(1.2) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1)   rotate(0); }
+}
+
+/* Preview: flow line reveals left → right */
+@keyframes studio-flow-line {
+  from { transform: scaleX(0); transform-origin: left center; }
+  to   { transform: scaleX(1); transform-origin: left center; }
+}
+
+/* Preview: node fade-up entrance */
+@keyframes studio-node-appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Preview: node glow pulse */
+@keyframes studio-node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0px  rgba(99,102,241,0.45); }
+  50%       { box-shadow: 0 0 0 7px  rgba(99,102,241,0); }
+}
+
+/* Estimate: bars grow from bottom */
+@keyframes studio-bar-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Estimate: percentage label fade-in */
+@keyframes studio-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* ─── Navbar ────────────────────────────────────────────── */
 
 /* ── Trigger circle ──────────────────────────────────────── */
