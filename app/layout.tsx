@@ -1,34 +1,21 @@
 import type { Metadata } from 'next'
-import { Orbitron } from 'next/font/google'
+import { Geist, Geist_Mono, Orbitron } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Preloader from '@/components/Preloader'
+import Navbar from '@/components/Navbar'
 import './globals.css'
 
-const orbitron = Orbitron({
-  subsets: ['latin'],
-  variable: '--font-orbitron',
-  weight: ['400', '500', '600', '700', '800', '900'],
-})
+const _geist = Geist({ subsets: ["latin"] });
+const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron", weight: ["700", "900"] });
 
 export const metadata: Metadata = {
-  title: 'Systems - Developer Platform',
-  description: 'Clean, minimal developer platform for building modern systems',
+  title: '6ystems - Business Systems You Own, Not SaaS You Rent',
+  description: 'Modular AI-enabled business systems platform. Own your systems, control your data, no vendor lock-in. Management, Booking, Records, Commercial, Communication, and Intelligence systems.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
 }
 
@@ -40,6 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={orbitron.variable}>
       <body className="font-sans antialiased">
+        <Preloader />
+        <Navbar />
         {children}
         <Analytics />
       </body>
