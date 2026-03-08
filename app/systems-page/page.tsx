@@ -16,6 +16,8 @@ import {
   PackageOpen, Users2, MessageCircle, LineChart,
   Settings2, Layers, Eye,
 } from 'lucide-react'
+
+import { FooterSection } from '@/components/sections/footer-section';
 import { cn } from '@/lib/utils'
 
 type Category = 'Management' | 'Booking' | 'Record' | 'Commercial' | 'Communication' | 'Intelligence'
@@ -345,6 +347,7 @@ export default function SystemsPage() {
           </div>
         </div>
       </section>
+      <FooterSection />
     </main>
   )
 }

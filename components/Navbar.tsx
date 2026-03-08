@@ -26,7 +26,7 @@ const SYSTEMS_PAGE_LINKS = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
-  const isSystemsPage = pathname === '/systems-page'
+  const isSystemsPage = ['/systems-page', '/privacy', '/terms'].includes(pathname)
 
   // Close on Escape
   useEffect(() => {
